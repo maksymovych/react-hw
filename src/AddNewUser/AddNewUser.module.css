@@ -1,0 +1,19 @@
+.addUserForm:first-child input{
+	background-color: hotpink;
+	border-radius: 10px 0 0 10pxs;
+}
+
+.addUserForm input:first-child {
+	border-radius: 10px 0 0 10px;
+	margin-right: -2px;
+}
+
+.addUserForm input:nth-child(n + 1){
+	border: 2px solid black;
+	margin-right: -2px;
+}
+
+.addUserForm button{
+	border-radius:0 10px 10px 0;
+	padding: 10px;
+}

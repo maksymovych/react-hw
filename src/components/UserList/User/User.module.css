@@ -1,0 +1,24 @@
+.card{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-basis: 30%;
+	border-radius: 10px;
+	background-color: rgba(70, 69, 69, 0.904);
+	margin: 10px;
+	color: honeydew;
+}
+
+.imgUser{
+	width: 50%;
+	margin: 5px;
+}
+.img{
+	max-width: 100%;
+    height: auto;
+}
+
+.cardInfo{
+	display: flex;
+	flex-direction: column;
+}

@@ -1,0 +1,16 @@
+.header{
+	padding: 10px;	
+}
+
+.iconImg{
+	width: 30px;
+}
+
+.searchWrapper{
+	display: flex;
+}
+
+.searchWrapper input{
+	border-radius: 10px  0  0 10px;
+	margin-right: -2px;
+}
