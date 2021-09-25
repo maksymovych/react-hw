@@ -9,8 +9,13 @@ function App() {
   const [users, setUsers] = useState(userArray);
   const [filter, setFilter] = useState("");
   const [sort, setSort] = useState("");
+  const [isActive, setIsActive] = useState(false);
+  const [isByName, setIsByName] = useState(false);
+  const [userCard, setUserCard] = useState({});
 
   const filterByName = useMemo(() => {
+    setIsByName(true);
+    console.log('nyName')
     return users.filter((user) => {
       const searchValue = filter.trim().toLowerCase();
       const usersName = user.name.toLowerCase();
@@ -18,19 +23,27 @@ function App() {
     });
   }, [filter, users]);
 
-  const sortByAge = function () {
-    if (!sort) return filterByName;
-    const filteredArray = [...filterByName];
+  const sortByAge = useMemo(() => {
+    setIsByName(false);
+    console.log('byAge')
+    if (!sort) return users;
+    const filteredArray = [...users];
     return filteredArray.sort((a, b) =>
       sort === "des" ? b.age - a.age : a.age - b.age
     );
-  };
+  }, [sort, users]);
 
-  const shownUsers = sortByAge();
+  const shownUsers = isByName ? filterByName : sortByAge;
 
   function addUser(newUser) {
     return setUsers([...users, newUser]);
   }
+
+  function openCard(shownUser){
+    setIsActive(true);
+    setUserCard(shownUser);
+    return;
+	}
 
   return (
     <div className="app">
@@ -41,7 +54,7 @@ function App() {
         sort={sort}
       />
       <AddNewUser addUser={addUser} />
-      <UserList user={shownUsers} />
+      <UserList openCard={openCard} userCard={userCard} user={shownUsers} isActive={isActive} setIsActive={setIsActive}/>
     </div>
   );
 }

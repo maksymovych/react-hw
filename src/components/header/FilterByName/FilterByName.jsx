@@ -5,7 +5,7 @@ function FilterByName({ setFilter, filter }) {
   return (
     <>
       <Input
-        plaseholder="Enter Name"
+        placeholder="Enter Name"
         type="text"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}

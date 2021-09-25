@@ -2,8 +2,9 @@ import React from 'react';
 import s from './User.module.css';
 
 function User(props) {
+
 	return ( 
-		<div className={s.card}>
+		<div className={s.card} onClick={()=>props.openCard(props.user)}>
 			<div className={s.imgUser}>
 				<img className={s.img} src={props.user.picture} alt={props.user.name} />
 			</div>
