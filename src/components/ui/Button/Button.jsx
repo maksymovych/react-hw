@@ -1,9 +1,9 @@
 import React from 'react';
-import s from './Button.module.css'
+import './Button.module.css'
 
 function Button({children, ...props}) {
 	return ( 
-		<button className={s.buttonSearch} {...props}>{children}</button>
+		<button {...props}>{children}</button>
 	 );
 }
 

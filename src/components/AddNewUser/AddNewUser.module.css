@@ -16,4 +16,15 @@
 .addUserForm button{
 	border-radius:0 10px 10px 0;
 	padding: 10px;
+	background-color: cornflowerblue;
+	color: white;
+	text-shadow: 1px 1px grey;
+}
+
+.addUserForm select{
+	border-radius: 10px 0 0 10px;
+	border: 2px solid black;
+	margin-right: -2px;
+	padding: 10px;
+	outline: none;
 }
