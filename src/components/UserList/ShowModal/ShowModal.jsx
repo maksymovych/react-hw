@@ -11,7 +11,7 @@ function ShowModal({ setIsActive, isActive, userCard }) {
           <img className={s.img} src={userCard.picture} alt={userCard.name} />
         </div>
         <div className={s.userField}>
-			<p>email: {userCard.email}</p>
+          <p>email: {userCard.email}</p>
           <p>Age: {userCard.age}</p>
           <p>Gender: {userCard.gender}</p>
           <p>Salary: {userCard.balance}</p>

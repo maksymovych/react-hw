@@ -15,7 +15,6 @@ function App() {
 
   const filterByName = useMemo(() => {
     setIsByName(true);
-    console.log('nyName')
     return users.filter((user) => {
       const searchValue = filter.trim().toLowerCase();
       const usersName = user.name.toLowerCase();
@@ -25,7 +24,6 @@ function App() {
 
   const sortByAge = useMemo(() => {
     setIsByName(false);
-    console.log('byAge')
     if (!sort) return users;
     const filteredArray = [...users];
     return filteredArray.sort((a, b) =>
@@ -54,7 +52,8 @@ function App() {
         sort={sort}
       />
       <AddNewUser addUser={addUser} />
-      <UserList openCard={openCard} userCard={userCard} user={shownUsers} isActive={isActive} setIsActive={setIsActive}/>
+      <UserList openCard={openCard} userCard={userCard} 
+      user={shownUsers} isActive={isActive} setIsActive={setIsActive}/>
     </div>
   );
 }
