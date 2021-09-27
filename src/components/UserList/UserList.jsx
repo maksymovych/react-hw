@@ -6,15 +6,16 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 function ListOfUsers({user, isActive, setIsActive, openCard, userCard}) {
-	const isShow =user.length ? s.noMatches : '';
-	
+
+	if (!user.length){
+		return <h2>Ooops... No matches found, try other opions!</h2>
+	}
 	return ( 
 		<>
 			<ShowModal userCard={userCard}  isActive={isActive} setIsActive={setIsActive}/>
 			<div className={s.cards} >
 				{user.map((item)=> <User openCard={openCard} key={uuidv4()} user={item}/>)}
 			</div>
-			<h2 className={isShow}>Ooops... No matches found, try other opions!</h2>
 		</>
 	 );
 }
