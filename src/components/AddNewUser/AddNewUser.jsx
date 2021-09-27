@@ -41,7 +41,7 @@ function AddNewUser(props) {
 
 	return ( 
 		<form className={s.addUserForm} action="submit">
-			<Select name={gender} value={input.gender} changeInput={changeInput} options={options} defaultValue='Any' />
+			<Select name={gender} value={input.gender} changeInput={changeInput} options={options} defaultValue='Gender' />
 			<Input value={input[name]} onChange={changeInput}type='text' name={name} placeholder={pref + name} />
 			<Input value={input.age} onChange={changeInput}type='number' name={age} placeholder={pref + age}/>
 			<Input value={input.balance} onChange={changeInput}type='number' name={balance} placeholder={pref + balance} />
