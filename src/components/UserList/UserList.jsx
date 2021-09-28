@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 function ListOfUsers({user, isActive, setIsActive, openCard, userCard}) {
 
 	if (!user.length){
-		return <h2>Ooops... No matches found, try other opions!</h2>
+		return <h2>Ooops... No matches found, try other opions!</h2>;
 	}
 	return ( 
 		<>
