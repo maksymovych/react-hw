@@ -1,0 +1,11 @@
+.buttonDefault{
+	padding: 20px 0;
+	border-radius: 15px;
+	color: white;
+	font-size: large;
+	font-weight: bold;
+	box-shadow: 3px 5px 5px rgba(115, 117, 117, 0.753);
+	cursor: pointer;
+	outline: none;
+	width: 30%;
+}
