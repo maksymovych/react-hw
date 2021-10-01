@@ -1,15 +1,15 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '../../ui/button/Button';
-import s from './Controls.module.css';
+import './Controls.css';
 
 
-function Controls({buttons, setIsStart}) {
+function Controls({buttons, onClick}) {
 	const controlPanel = buttons.map(unit=> 
-<Button key={uuidv4()} color={unit.color} onClick={unit.onClick}>{unit.body}</Button>
+<Button key={uuidv4()} id={unit.body} color={unit.color} onClick={onClick}>{unit.body}</Button>
 	);
 	return ( 
-		<div className={s.controls}>
+		<div className='controls'>
 			{controlPanel}
 		</div>
 	 );
