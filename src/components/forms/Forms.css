@@ -1,6 +1,7 @@
 .formWrapper {
   width: 50%;
-  margin: 15% auto;
+  max-width: 400px;
+  margin: 10% auto;
   background-color: lightblue;
   display: flex;
   flex-direction: column;
@@ -10,9 +11,9 @@
   padding: 20px;
 }
 
-.worningInput {
-  border: 2px solid red;
-  border-radius: 4px;
+.warning {
+  Color: red;
+ margin: 0;
 }
 
 input {
@@ -23,6 +24,7 @@ input {
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
+  outline: none;
 }
 
 .buttonWrapper {
@@ -39,4 +41,8 @@ h2{
 p{
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+body{
+  background-color: rgba(128, 128, 128, 0.739);
 }

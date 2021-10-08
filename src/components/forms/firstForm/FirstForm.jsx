@@ -8,16 +8,16 @@ import { changeForm, submitForm } from "../../../actions/actions";
 
 const schema = yup
   .object({
-    name: yup.string().max(30).min(2),
-    lastName: yup.string().max(30).min(2),
-    email: yup.string().email().required(),
+    name: yup
+      .string()
+      .max(30)
+      .min(2)
+      .matches(/^[A-Za-z]+$/i, "Must contain only letters")
+      .required("Name is requared"),
+    lastName: yup.string().max(30).min(2).required("Last Name is requared"),
+    email: yup.string().email().required("Fill email address"),
   })
-  .required();
-
-const validation = {
-  required: true,
-  pattern: /^[A-Za-z]+$/i,
-};
+  .required("All fields must be filled");
 
 const FirstForm = () => {
   const [state, dispatch] = useFormStore();
@@ -40,29 +40,26 @@ const FirstForm = () => {
     <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
       <h2>Fill registration form</h2>
       <label htmlFor="name">First Name</label>
-      <input
-        {...register("name", validation)}
-        type="text"
-        id="name"
-        defaultValue={name}
-      />
+      {!!errors?.name && <p className="warning">{errors?.name?.message}</p>}
+      <input {...register("name")} type="text" id="name" defaultValue={name} />
       <label htmlFor="lestName">Last Name</label>
+      {!!errors?.lastName && (
+        <p className="warning">{errors?.lastName?.message}</p>
+      )}
       <input
-        {...register("lastName", validation)}
+        {...register("lastName")}
         type="text"
         id="lastName"
         defaultValue={lastName}
       />
-      {errors.name?.type === "required" && <p>{"First name is required"}</p>}
-
       <label htmlFor="email">Email</label>
+      {!!errors?.email && <p className="warning">{errors?.email?.message}</p>}
       <input
         {...register("email")}
         type="email"
         id="email"
         defaultValue={email}
       />
-      {errors.email?.type === "required" && <p>{"Email is required"}</p>}
       <div className="buttonWrapper">
         <InputButton type="submit" value="Next" />
       </div>

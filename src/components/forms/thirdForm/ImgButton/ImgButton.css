@@ -1,0 +1,12 @@
+.imgButton{
+	border: none;
+	width: calc(100%/2);
+	outline: none;
+	cursor: pointer;
+	border: 3px solid #F2F2F2;
+}
+
+.imgButton:hover{
+	border: 2px solid #4caf4fad;
+	border-radius: 5px;
+}

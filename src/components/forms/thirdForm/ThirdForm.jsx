@@ -2,24 +2,38 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { changeForm, submitForm } from "../../../actions/actions";
 import { useFormStore } from "../../../context/Context";
+import { imgLinks } from "../../../imgLinks/imgLinks";
 import InputButton from "../../ui/button/InputButton";
+import ImgButton from "./ImgButton/ImgButton";
 
 const ThirdForm = () => {
   const [, dispatch] = useFormStore();
+
+  const images = imgLinks.map((link) => (
+    <ImgButton
+      onClick={choosePhoto}
+      src={link.src}
+      alt={link.title}
+      key={link.title}
+      type="button"
+    />
+  ));
+
+  function choosePhoto(e) {
+    const chosenPhoto = e.target.src;
+    dispatch(submitForm("thirdForm", chosenPhoto));
+  }
+
   function upload(e) {
     console.log(e, "upload");
   }
 
-  function previousForm(e) {
-    console.log(e, "previousForm");
-  }
-
-  function nextForm(e) {
-    console.log(e, "next");
+  function previousForm() {
+    dispatch(changeForm(-1));
   }
 
   const onSubmit = (data) => {
-    dispatch(submitForm("thirddForm", data));
+    console.log(data);
     dispatch(changeForm(1));
   };
 
@@ -29,17 +43,22 @@ const ThirdForm = () => {
     <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
       <h2>Upload the photo</h2>
       <div className="buttonWrapper">
-        <InputButton onClick={upload} value="Upload Photo" readOnly />
+        <InputButton
+          onClick={upload}
+          type="button"
+          value="Upload Photo"
+          readOnly
+        />
       </div>
-      <div>Some avatars</div>
+      <div>{images}</div>
       <div className="buttonWrapper">
         <InputButton
           onClick={previousForm}
-          type="submit"
+          type="button"
           value="Previous"
           readOnly
         />
-        <InputButton onClick={nextForm} type="submit" value="Next" readOnly />
+        <InputButton type="submit" value="Next" readOnly />
       </div>
     </form>
   );

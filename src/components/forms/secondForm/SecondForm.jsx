@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useFormStore } from "../../../context/Context";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -10,21 +10,18 @@ const schema = yup
   .object({
     city: yup.string().max(30).min(3).required(),
     street: yup.string().max(30).min(3),
-    house: yup.string(),
+    house: yup.string().max(5).required("House is required"),
   })
   .required();
 
-const validation = {
-  required: true,
-  pattern: /^[A-Za-z]+$/i,
-};
-
 const SecondForm = () => {
   const [state, dispatch] = useFormStore();
-  console.log(state);
+  const fields = useMemo(() => state.secondForm, [state]);
+  const { city, street, house } = fields;
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -35,33 +32,42 @@ const SecondForm = () => {
     dispatch(changeForm(1));
   };
 
-  const previousForm = () => {
-    console.log("qw");
+  function backToForm() {
+    dispatch(submitForm("secondForm", watch()));
     dispatch(changeForm(-1));
-  };
-  const nextForm = () => {
-    dispatch(changeForm(1));
-  };
+  }
 
   return (
     <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
       <h2>Fill the address fields</h2>
       <label htmlFor="city">City</label>
-      <input {...register("city", validation)} type="address" id="city" />
-      {errors.city?.type === "required" && <p>{"City is required"}</p>}
+      {!!errors.city && <p className="warning">{"City is required"}</p>}
+      <input
+        {...register("city")}
+        type="address"
+        id="city"
+        defaultValue={city}
+      />
       <label htmlFor="street">Street</label>
-      <input {...register("street", validation)} type="address" id="street" />
+      {!!errors?.street && <p className="warning">{errors?.street?.message}</p>}
+      <input
+        {...register("street")}
+        type="address"
+        id="street"
+        defaultValue={street}
+      />
 
       <label htmlFor="house">House</label>
-      <input {...register("house")} type="address" id="house" />
-      {errors.email?.type === "required" && <p>{"Email is required"}</p>}
+      {!!errors?.house && <p className="warning">{errors?.house?.message}</p>}
+      <input
+        {...register("house")}
+        type="address"
+        id="house"
+        defaultValue={house}
+      />
       <div className="buttonWrapper">
-        <InputButton
-          onClick={() => previousForm}
-          type="submit"
-          value="Previous"
-        />
-        <InputButton onClick={() => nextForm} type="submit" value="Next" />
+        <InputButton type="button" value="Previous" onClick={backToForm} />
+        <InputButton type="submit" value="Next" />
       </div>
     </form>
   );

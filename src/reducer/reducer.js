@@ -1,10 +1,10 @@
 import { CHANGE_FORM, GET_USER_DATA, SUBMIT_FORM } from "../actions/actions";
 
 export const initialState = {
-  step: 1,
+  step: 3,
   firstForm: {},
   secondForm: {},
-  thirdForm: {},
+  thirdForm: "",
   fourthForm: {},
   result: [],
 };
