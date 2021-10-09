@@ -4,17 +4,18 @@ import { changeForm, submitForm } from "../../../actions/actions";
 import { useFormStore } from "../../../context/Context";
 import { imgLinks } from "../../../imgLinks/imgLinks";
 import InputButton from "../../ui/button/InputButton";
+import DropZone from "./dropZone/DropZone";
 import ImgButton from "./ImgButton/ImgButton";
 
 const ThirdForm = () => {
   const [, dispatch] = useFormStore();
 
-  const images = imgLinks.map((link) => (
+  const images = imgLinks.map((link, i) => (
     <ImgButton
       onClick={choosePhoto}
       src={link.src}
       alt={link.title}
-      key={link.title}
+      key={i}
       type="button"
     />
   ));
@@ -24,16 +25,11 @@ const ThirdForm = () => {
     dispatch(submitForm("thirdForm", chosenPhoto));
   }
 
-  function upload(e) {
-    console.log(e, "upload");
-  }
-
   function previousForm() {
     dispatch(changeForm(-1));
   }
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = () => {
     dispatch(changeForm(1));
   };
 
@@ -42,14 +38,8 @@ const ThirdForm = () => {
   return (
     <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
       <h2>Upload the photo</h2>
-      <div className="buttonWrapper">
-        <InputButton
-          onClick={upload}
-          type="button"
-          value="Upload Photo"
-          readOnly
-        />
-      </div>
+      <DropZone />
+      <h5>Or chose from default avatars:</h5>
       <div>{images}</div>
       <div className="buttonWrapper">
         <InputButton

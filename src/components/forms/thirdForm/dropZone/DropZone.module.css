@@ -1,0 +1,26 @@
+.wrapperDropzone{
+	padding: 10px;
+	border: 2px dashed darkgrey;
+	border-radius: 10px;
+	background-color: rgba(169, 169, 169, 0.527);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+}
+
+.cloud{
+	color: gray;
+	font-size: 60px;
+	position: relative;
+}
+.cloud::before{
+	content: '\2B06';
+	position: absolute;
+	color: white;
+	font-size: 30px;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: .8;
+}

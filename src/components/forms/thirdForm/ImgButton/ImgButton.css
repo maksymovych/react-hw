@@ -6,7 +6,10 @@
 	border: 3px solid #F2F2F2;
 }
 
-.imgButton:hover{
+.imgButton:hover,
+.imgButton:focus{
 	border: 2px solid #4caf4fad;
 	border-radius: 5px;
 }
+
+
