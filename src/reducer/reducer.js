@@ -6,7 +6,7 @@ import {
 } from "../actions/actions";
 
 export const initialState = {
-  step: 3,
+  step: 1,
   isDarkMode: false,
   firstForm: {},
   secondForm: {},
