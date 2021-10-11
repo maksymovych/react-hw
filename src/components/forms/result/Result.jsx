@@ -18,7 +18,7 @@ const Result = () => {
     return Swal.fire("Thank you!", "Successfuly registered!", "success");
   }, []);
   return (
-    <div className="formWrapper">
+    <>
       {successAlert}
       <h2>Registration succid! Thank you!</h2>
       <img
@@ -28,7 +28,7 @@ const Result = () => {
       />
       <h3>Contact info:</h3>
       {userInfo}
-    </div>
+    </>
   );
 };
 

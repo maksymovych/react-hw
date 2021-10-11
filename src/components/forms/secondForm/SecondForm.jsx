@@ -38,7 +38,7 @@ const SecondForm = () => {
   }
 
   return (
-    <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Fill the address fields</h2>
       <label htmlFor="city">City</label>
       {!!errors.city && <p className="warning">{"City is required"}</p>}

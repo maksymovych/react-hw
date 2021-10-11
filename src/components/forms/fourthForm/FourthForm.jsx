@@ -42,7 +42,7 @@ const FourthForm = () => {
   }
 
   return (
-    <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Confirm the password</h2>
       <label htmlFor="password">Password</label>
       {!!errors?.password && (

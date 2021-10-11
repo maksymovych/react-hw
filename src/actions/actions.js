@@ -1,7 +1,7 @@
 export const CHANGE_FORM = "[form] - change form";
 export const SUBMIT_FORM = "[form] - submit form";
 export const GET_USER_DATA = "[user data] - get user data";
-export const GET_USER_PHOTO = "[user photo] - get user photo";
+export const DARK_MODE = "[dark mode] - switch to darsk mode";
 
 export const changeForm = (step) => ({
   type: CHANGE_FORM,
@@ -20,6 +20,6 @@ export const getUserData = () => ({
   type: GET_USER_DATA,
 });
 
-export const getUserPhoto = () => ({
-  type: GET_USER_PHOTO,
+export const darkMode = () => ({
+  type: DARK_MODE,
 });

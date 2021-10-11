@@ -36,7 +36,7 @@ const ThirdForm = () => {
   const { handleSubmit } = useForm();
 
   return (
-    <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Upload the photo</h2>
       <DropZone />
       <h5>Or chose from default avatars:</h5>

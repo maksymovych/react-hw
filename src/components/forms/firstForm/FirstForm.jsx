@@ -37,7 +37,7 @@ const FirstForm = () => {
   };
 
   return (
-    <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Fill registration form</h2>
       <label htmlFor="name">First Name</label>
       {!!errors?.name && <p className="warning">{errors?.name?.message}</p>}

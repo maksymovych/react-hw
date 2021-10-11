@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormStore } from "../../context/Context";
+import Switcher from "../ui/switcher/Switcher";
 import FirstForm from "./firstForm/FirstForm";
 import "./Forms.css";
 import FourthForm from "./fourthForm/FourthForm";
@@ -9,7 +10,7 @@ import ThirdForm from "./thirdForm/ThirdForm";
 
 const Forms = () => {
   const [state] = useFormStore();
-  const form = () => {
+  const Form = () => {
     switch (state.step) {
       case 1:
         return <FirstForm />;
@@ -26,7 +27,17 @@ const Forms = () => {
     }
   };
 
-  return form();
+  let styleForm = ["formWrapper"];
+  if (state.isDarkMode) {
+    styleForm = [...styleForm, "darkFormWrapper"];
+  }
+
+  return (
+    <div className={styleForm.join(" ")}>
+      <Switcher />
+      <Form />
+    </div>
+  );
 };
 
 export default Forms;

@@ -1,7 +1,13 @@
-import { CHANGE_FORM, GET_USER_DATA, SUBMIT_FORM } from "../actions/actions";
+import {
+  CHANGE_FORM,
+  DARK_MODE,
+  GET_USER_DATA,
+  SUBMIT_FORM,
+} from "../actions/actions";
 
 export const initialState = {
-  step: 1,
+  step: 3,
+  isDarkMode: false,
   firstForm: {},
   secondForm: {},
   thirdForm: "",
@@ -32,6 +38,11 @@ export const reducer = (state = initialState, action) => {
           { title: "Street", value: state.secondForm.street },
           { title: "House", value: state.secondForm.house },
         ],
+      };
+    case DARK_MODE:
+      return {
+        ...state,
+        isDarkMode: !state.isDarkMode,
       };
     default:
       return state;
