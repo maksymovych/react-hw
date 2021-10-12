@@ -6,7 +6,7 @@ const ImgButton = ({ src, alt, ...props }) => {
     width: "100%",
   };
   return (
-    <button className="imgButton" to="" {...props}>
+    <button className="imgButton" {...props}>
       <img style={styleButton} src={src} alt={alt} />
     </button>
   );

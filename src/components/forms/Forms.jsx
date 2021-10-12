@@ -34,7 +34,7 @@ const Forms = () => {
 
   return (
     <div className={styleForm.join(" ")}>
-      <Switcher />
+      {state.step < 5 && <Switcher />}
       <Form />
     </div>
   );

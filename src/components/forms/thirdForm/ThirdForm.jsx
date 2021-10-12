@@ -2,13 +2,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { changeForm, submitForm } from "../../../actions/actions";
 import { useFormStore } from "../../../context/Context";
-import { imgLinks } from "../../../imgLinks/imgLinks";
+import { imgLinks } from "../../../accets/imgLinks/imgLinks";
 import InputButton from "../../ui/button/InputButton";
 import DropZone from "./dropZone/DropZone";
 import ImgButton from "./ImgButton/ImgButton";
 
 const ThirdForm = () => {
-  const [, dispatch] = useFormStore();
+  const [{ thirdForm }, dispatch] = useFormStore();
 
   const images = imgLinks.map((link, i) => (
     <ImgButton
@@ -41,6 +41,7 @@ const ThirdForm = () => {
       <DropZone />
       <h5>Or chose from default avatars:</h5>
       <div>{images}</div>
+      {thirdForm && <p>Photo was added!</p>}
       <div className="buttonWrapper">
         <InputButton
           onClick={previousForm}

@@ -1,25 +1,25 @@
-import React, { useEffect } from "react";
-import { getUserData } from "../../../actions/actions";
+import React, { useEffect, useMemo } from "react";
 import { useFormStore } from "../../../context/Context";
 import ContactItem from "./ContactItem";
 import Swal from "sweetalert2";
 
 const Result = () => {
-  const [state, dispatch] = useFormStore();
-  useEffect(() => dispatch(getUserData()), [dispatch]);
+  const [state] = useFormStore();
+
   const userData = state.result;
 
   const userPhoto = state.thirdForm;
 
-  const userInfo = userData.map((item, index) => (
-    <ContactItem field={item} key={index} />
-  ));
-  const successAlert = useEffect(() => {
+  const userInfo = useMemo(
+    () =>
+      userData.map((item, index) => <ContactItem field={item} key={index} />),
+    [userData]
+  );
+  useEffect(() => {
     return Swal.fire("Thank you!", "Successfuly registered!", "success");
   }, []);
   return (
     <>
-      {successAlert}
       <h2>Registration succid! Thank you!</h2>
       <img
         src={userPhoto}

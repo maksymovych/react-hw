@@ -5,25 +5,23 @@ import { useFormStore } from "../../../../context/Context";
 import s from "./DropZone.module.css";
 
 function DropZone() {
-  const [, dispatch] = useFormStore();
-  const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      const reader = new FileReader();
+   const [, dispatch] = useFormStore();
 
-      reader.onload = () => {
-        // Do whatever you want with the file contents
-        const binaryStr = reader.result;
-        dispatchImg(binaryStr);
-      };
-      reader.readAsDataURL(file);
-    });
-  }, []);
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+   const onDrop = useCallback(
+     (acceptedFiles) => {
+       acceptedFiles.forEach((file) => {
+         const reader = new FileReader();
 
-  const dispatchImg = (img) => {
-    dispatch(submitForm("thirdForm", img));
-  };
-
+         reader.onload = () => {
+           dispatch(submitForm("thirdForm", reader.result));
+         };
+         reader.readAsDataURL(file);
+       });
+     },
+     [dispatch]
+   );
+   const { getRootProps, getInputProps } = useDropzone({ onDrop });
+ 
   return (
     <div {...getRootProps()} className={s.wrapperDropzone}>
       <input {...getInputProps()} />

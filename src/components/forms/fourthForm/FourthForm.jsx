@@ -4,14 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useFormStore } from "../../../context/Context";
-import { changeForm, submitForm } from "../../../actions/actions";
+import { changeForm, getUserData, submitForm } from "../../../actions/actions";
 
 const schema = yup
   .object({
     password: yup
       .string()
       .max(30)
-      .min(4)
+      .min(4, "To short")
       .required("The password is required field"),
   })
   .required();
@@ -33,6 +33,7 @@ const FourthForm = () => {
     if (data.password !== data.confirmpassword)
       return alert("Password mismatch, try again");
     dispatch(submitForm("fourthForm", data));
+    dispatch(getUserData());
     dispatch(changeForm(1));
   };
 
