@@ -8,27 +8,24 @@ function DropZone() {
    const [, dispatch] = useFormStore();
 
    const onDrop = useCallback(
-     (acceptedFiles) => {
-       acceptedFiles.forEach((file) => {
-         const reader = new FileReader();
-
-         reader.onload = () => {
-           dispatch(submitForm("thirdForm", reader.result));
-         };
-         reader.readAsDataURL(file);
-       });
+     (file) => {
+       const reader = new FileReader();
+       reader.readAsDataURL(file[0]);
+       reader.onload = () => {
+         dispatch(submitForm("thirdForm", reader.result));
+       };
      },
      [dispatch]
    );
    const { getRootProps, getInputProps } = useDropzone({ onDrop });
- 
-  return (
-    <div {...getRootProps()} className={s.wrapperDropzone}>
-      <input {...getInputProps()} />
-      <p>Drag 'n' drop some files here, or click to select files</p>
-      <span className={s.cloud}>&#9729;</span>
-    </div>
-  );
+
+   return (
+     <div {...getRootProps()} className={s.wrapperDropzone}>
+       <input {...getInputProps()} />
+       <p>Drag 'n' drop one file here, or click to select files</p>
+       <span className={s.cloud}>&#9729;</span>
+     </div>
+   );
 }
 
 export default DropZone;
