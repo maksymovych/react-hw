@@ -1,4 +1,3 @@
-import React from "react";
 import Grid from "@mui/material/Grid";
 import UserCard from "./UserCard";
 import { useSelector } from "react-redux";

@@ -1,5 +1,4 @@
 import { fetchCardsSuccess, getCardsSuccess } from ".";
-import { useId } from "react-id-generator";
 import { fetchCards as fetchCardsApi } from "../apis/index";
 import { fetchWinnerInfoApi } from "../apis/index";
 import { cards } from "../data/localDB";
@@ -14,7 +13,8 @@ export const fetchCards = () => {
       const newCards = cards.map((card) => ({
         ...card,
         firstName: random.first(),
-        id: useId(),
+        lastName: random.last(),
+        id: uuidv4().split("-")[0],
       }));
       dispatch(fetchCardsSuccess(newCards));
     } catch (e) {
