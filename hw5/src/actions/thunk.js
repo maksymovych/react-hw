@@ -3,6 +3,7 @@ import { useId } from "react-id-generator";
 import { fetchCards as fetchCardsApi } from "../apis/index";
 import { fetchWinnerInfoApi } from "../apis/index";
 import { cards } from "../data/localDB";
+import { v4 as uuidv4 } from "uuid";
 
 export const fetchCards = () => {
   const random = require("random-name");
@@ -12,7 +13,7 @@ export const fetchCards = () => {
       console.log("!!!!", cards);
       const newCards = cards.map((card) => ({
         ...card,
-        name: random.first(),
+        firstName: random.first(),
         id: useId(),
       }));
       dispatch(fetchCardsSuccess(newCards));
@@ -39,8 +40,9 @@ export const getCards = () => {
       const random = require("random-name");
       const newCards = cards.map((card) => ({
         ...card,
-        name: random.first(),
-        id: useId(),
+        firstName: random.first(),
+        lastName: random.last(),
+        id: uuidv4().split("-")[0],
       }));
       dispatch(getCardsSuccess(newCards));
     } catch (e) {

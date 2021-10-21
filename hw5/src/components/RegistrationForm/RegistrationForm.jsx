@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Typography from "@mui/material/Typography";
 import Input from "../ui/Input/Input";
 import { useForm } from "react-hook-form";
 import { FormLabel } from "@mui/material";
 import * as yup from "yup";
-import LoadingButton from "@mui/lab/LoadingButton";
-import SaveIcon from "@mui/icons-material/Save";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomButton from "../ui/CustomButton/CustomButton";
 
@@ -15,7 +14,6 @@ const schema = yup.object({
 });
 
 function RegistrationForm() {
-  const [isLoading, setIsLoadig] = useState(false);
   const {
     register,
     handleSubmit,
@@ -27,9 +25,7 @@ function RegistrationForm() {
     console.log(values);
     reset();
   };
-  const clickToLoad = (e) => {
-    setIsLoadig((isLoad) => !isLoad);
-  };
+
   return (
     <form sx={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
       <Typography align="center" variant="h4">
@@ -51,18 +47,8 @@ function RegistrationForm() {
         type="text"
         id="lastName"
       />
-      <CustomButton type="submit">
-        <LoadingButton
-          loading={isLoading}
-          color="inherit"
-          loadingPosition="start"
-          startIcon={<SaveIcon />}
-          disabled={false}
-          size="larg"
-          onClick={clickToLoad}
-        >
-          Save
-        </LoadingButton>
+      <CustomButton type="submit" size="larg">
+        blabla
       </CustomButton>
     </form>
   );

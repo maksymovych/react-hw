@@ -8,7 +8,7 @@ export default function ContainerCards() {
 
   useEffect(() => {
     dispatch(getCards());
-  }, []);
+  }, [dispatch]);
 
   return <Main />;
 }

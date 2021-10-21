@@ -9,10 +9,15 @@ const initialState = {
 export function cardsReducer(state = initialState, action) {
   switch (action.type) {
     case FINDE_MATCHES:
+      if (!action.payload) {
+        return state;
+      }
+      const string = action.payload.toLowerCase();
       const filteredCards = state.cards.filter(
-        (item) =>
-          item.firstName.includes(action.payload) ||
-          item.latsName.includes(action.payload)
+        ({ id, firstName, lastName }) =>
+          id.toLowerCase().includes(string) ||
+          firstName.toLowerCase().includes(string) ||
+          lastName.toLowerCase().includes(string)
       );
       return {
         ...state,
@@ -22,7 +27,10 @@ export function cardsReducer(state = initialState, action) {
     case GET_CARDS_SUCCESS:
       return {
         ...state,
-        ...(state.cards[state.cards.length] = action.payload),
+        cards: [
+          ...state.cards,
+          ...action.payload
+        ]
       };
     default:
       return state;
