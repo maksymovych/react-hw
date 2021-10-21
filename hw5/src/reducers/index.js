@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import cards from "./cards";
+import { cardsReducer as cards } from "./cards";
 
 export const rootReducer = combineReducers({
   cards,

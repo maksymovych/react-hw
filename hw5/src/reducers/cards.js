@@ -1,16 +1,28 @@
 import { FINDE_MATCHES } from "../actions/cards";
-import { FETCH_CARDS_SUCCESS } from "../actions";
+import { FETCH_CARDS_SUCCESS, GET_CARDS_SUCCESS } from "../actions";
 
-const initialState = {};
+const initialState = {
+  searchInput: "",
+  cards: [],
+};
 
-export function cards(state = initialState, action) {
+export function cardsReducer(state = initialState, action) {
   switch (action.type) {
     case FINDE_MATCHES:
-      return {};
-    case FETCH_CARDS_SUCCESS:
+      const filteredCards = state.cards.filter(
+        (item) =>
+          item.firstName.includes(action.payload) ||
+          item.latsName.includes(action.payload)
+      );
       return {
         ...state,
-        ...action.payload,
+        ...(state.cards = filteredCards),
+      };
+    case FETCH_CARDS_SUCCESS:
+    case GET_CARDS_SUCCESS:
+      return {
+        ...state,
+        ...(state.cards[state.cards.length] = action.payload),
       };
     default:
       return state;

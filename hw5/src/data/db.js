@@ -20,9 +20,9 @@ module.exports = () => {
     button: "Register participant",
   };
 
-  const winnerInfo = {
+  const winnerinfo = {
     title: "Total participants:",
     button: "Show winner",
   };
-  return { cards, registration, winnerInfo };
+  return { cards, registration, winnerinfo };
 };
