@@ -1,8 +1,11 @@
 import { FINDE_MATCHES } from "../actions/cards";
-import { FETCH_CARDS_SUCCESS, GET_CARDS_SUCCESS } from "../actions";
+import {
+  FETCH_CARDS_SUCCESS,
+  REMOVE_CARD,
+  SAVE_NEW_PARTICIPANT,
+} from "../actions";
 
 const initialState = {
-  searchInput: "",
   cards: [],
   _cards: [],
 };
@@ -28,11 +31,21 @@ export function cardsReducer(state = initialState, action) {
         cards: [...filteredCards],
       };
     case FETCH_CARDS_SUCCESS:
-    case GET_CARDS_SUCCESS:
       return {
-        ...state,
         cards: [...state.cards, ...action.payload],
         _cards: [...state.cards, ...action.payload],
+      };
+    case REMOVE_CARD:
+      const newList = state._cards.filter((card) => card.id !== action.payload);
+      return {
+        cards: [...newList],
+        _cards: [...newList],
+      };
+    case SAVE_NEW_PARTICIPANT:
+      console.log(action.payload);
+      return {
+        cards: [...state.cards, { ...action.payload }],
+        _cards: [...state._cards, { ...action.payload }],
       };
     default:
       return state;

@@ -6,10 +6,6 @@ import Main from "../components/Main";
 export default function ContainerCards() {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getCards());
-  // }, [dispatch]);
-
   useEffect(() => {
     dispatch(fetchCards());
   }, [dispatch]);

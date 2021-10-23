@@ -7,10 +7,11 @@ import WinnerInfo from "./WinnerInfo/WinnerInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { findeMatches } from "../actions";
 import { Typography } from "@mui/material";
+import Timer from "./Timer/Timer";
 
 function Main() {
   const dispatch = useDispatch();
-  const { cards } = useSelector((store) => store.cards);
+  const { cards, registration } = useSelector((store) => store);
 
   const handleChangeInput = (e) => {
     const value = e.target.value;
@@ -21,7 +22,7 @@ function Main() {
     <Grid container spacing={4}>
       <Grid item xs={12} md={8}>
         <Input label="Search..." onChange={handleChangeInput} />
-        {!cards.length ? (
+        {!cards.cards.length ? (
           <Typography>Sorry... no mutches found</Typography>
         ) : (
           <Cards />
@@ -29,7 +30,7 @@ function Main() {
       </Grid>
 
       <Grid item xs={12} md={4}>
-        <RegistrationForm />
+        {registration.isRegistered ? <Timer /> : <RegistrationForm />}
         <WinnerInfo />
       </Grid>
     </Grid>

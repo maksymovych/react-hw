@@ -2,6 +2,7 @@ export const FINDE_MATCHES = "[search] finde matches";
 export const FETCH_CARDS_SUCCESS = "[cards] fetch cards success";
 export const GET_CARDS = "[cards] get cards";
 export const GET_CARDS_SUCCESS = "[cards] get cards success";
+export const REMOVE_CARD = "[cards] remove card";
 
 export const findeMatches = (word) => ({
   type: FINDE_MATCHES,
@@ -16,4 +17,9 @@ export const fetchCardsSuccess = (cards) => ({
 export const getCardsSuccess = (cards) => ({
   type: GET_CARDS_SUCCESS,
   payload: cards,
+});
+
+export const removeCard = (id) => ({
+  type: REMOVE_CARD,
+  payload: id,
 });

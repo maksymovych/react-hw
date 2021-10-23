@@ -8,13 +8,12 @@ const apiCall = axios.create({
 
 export async function fetchCards() {
   const { data } = await apiCall.get("/cards");
-
   return data;
 }
 
 export async function fetchRegistration() {
-  const { registration } = await apiCall.get("/registration/");
-  return registration;
+  const { data } = await apiCall.get("/registration/");
+  return data;
 }
 
 export async function fetchWinnerInfoApi() {

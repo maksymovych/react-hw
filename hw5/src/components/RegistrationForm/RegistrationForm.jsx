@@ -3,15 +3,13 @@ import Typography from "@mui/material/Typography";
 import Input from "../ui/Input/Input";
 import { useForm } from "react-hook-form";
 import { FormLabel } from "@mui/material";
-import * as yup from "yup";
-
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomButton from "../ui/CustomButton/CustomButton";
-
-const schema = yup.object({
-  firstName: yup.string().required("First Name is required").min(2).max(20),
-  lastdName: yup.string().required("Last Name is required").min(2).max(20),
-});
+import { schema } from "../../utils/validations";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { registrNewUser } from "../../actions";
+import { v4 as uuidv4 } from "uuid";
 
 function RegistrationForm() {
   const {
@@ -19,37 +17,42 @@ function RegistrationForm() {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({ mode: "onBlur", resolver: yupResolver(schema) });
+  const dispatch = useDispatch();
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const { fieldData } = useSelector((state) => state.registration);
+
+  const onSubmit = (data) => {
+    dispatch(registrNewUser({ ...data, id: uuidv4().split("-")[0] }));
     reset();
   };
-
+  const fields = fieldData.inputs.map(({ registr, label, input }, i) => {
+    return (
+      <div key={i}>
+        <FormLabel>{label}</FormLabel>
+        <Input
+          {...register(registr)}
+          label={input}
+          error={!!errors?.[registr]}
+        />
+      </div>
+    );
+  });
+  const { lastName, firstName } = watch();
+  const isSHowButton = !!lastName && !!firstName;
   return (
-    <form sx={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate sx={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
       <Typography align="center" variant="h4">
-        Registration user
+        {fieldData.title}
       </Typography>
-      <FormLabel>Registration user</FormLabel>
-      <Input
-        {...register("firstName")}
-        label="Firts Name"
-        error={!!errors?.firstName}
-        helperText={errors?.firstName?.message}
-      />
-      <Input
-        {...register("lastName")}
-        defaultValue="111"
-        name="lastName"
-        error={!!errors.lastName}
-        helperText={errors?.lastName?.message}
-        type="text"
-        id="lastName"
-      />
-      <CustomButton type="submit" size="larg">
-        blabla
-      </CustomButton>
+
+      {fields}
+      {isSHowButton && (
+        <CustomButton fullWidth type="submit">
+          {fieldData.button}
+        </CustomButton>
+      )}
     </form>
   );
 }
