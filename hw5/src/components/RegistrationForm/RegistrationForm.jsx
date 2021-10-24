@@ -2,7 +2,7 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import Input from "../ui/Input/Input";
 import { useForm } from "react-hook-form";
-import { FormLabel } from "@mui/material";
+import { Container, FormLabel } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomButton from "../ui/CustomButton/CustomButton";
 import { schema } from "../../utils/validations";
@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { registrNewUser } from "../../actions";
 import { v4 as uuidv4 } from "uuid";
+import { stylesContainer } from "../../assets/stulesContainer";
 
 function RegistrationForm() {
   const {
@@ -33,6 +34,7 @@ function RegistrationForm() {
         <FormLabel>{label}</FormLabel>
         <Input
           {...register(registr)}
+          sx={stylesContainer}
           label={input}
           error={!!errors?.[registr]}
         />
@@ -41,19 +43,24 @@ function RegistrationForm() {
   });
   const { lastName, firstName } = watch();
   const isSHowButton = !!lastName && !!firstName;
-  return (
-    <form noValidate sx={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
-      <Typography align="center" variant="h4">
-        {fieldData.title}
-      </Typography>
 
-      {fields}
-      {isSHowButton && (
-        <CustomButton fullWidth type="submit">
-          {fieldData.button}
-        </CustomButton>
-      )}
-    </form>
+  const styles = {
+    p: "30px",
+  };
+  return (
+    <Container sx={{ ...stylesContainer, ...styles }}>
+      <form noValidate sx={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
+        <Typography align="center" variant="h5" sx={{ p: "10px" }}>
+          {fieldData.title}
+        </Typography>
+        {fields}
+        {isSHowButton && (
+          <CustomButton fullWidth type="submit">
+            {fieldData.button}
+          </CustomButton>
+        )}
+      </form>
+    </Container>
   );
 }
 

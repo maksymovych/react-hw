@@ -19,7 +19,7 @@ function Cards() {
       container
       spacing={4}
       direction="row"
-      justifyContent="space-between"
+      justifyContent="center"
       alignItems="flex-start"
     >
       {listOfcards}

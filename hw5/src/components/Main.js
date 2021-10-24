@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { findeMatches } from "../actions";
 import { Typography } from "@mui/material";
 import Timer from "./Timer/Timer";
+import { stylesContainer } from "../assets/stulesContainer";
 
 function Main() {
   const dispatch = useDispatch();
@@ -21,7 +22,12 @@ function Main() {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} md={8}>
-        <Input label="Search..." onChange={handleChangeInput} />
+        <Input
+          sx={stylesContainer}
+          label="Search..."
+          type="text"
+          onChange={handleChangeInput}
+        />
         {!cards.cards.length ? (
           <Typography>Sorry... no mutches found</Typography>
         ) : (

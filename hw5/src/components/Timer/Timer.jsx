@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Modal, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -9,8 +9,20 @@ import {
   startTimer,
   stopTimer,
 } from "../../actions";
+import { stylesContainer } from "../../assets/stulesContainer";
 import { timeToString } from "../../utils/timeToString";
 import CustomButton from "../ui/CustomButton/CustomButton";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "white",
+  boxShadow: 24,
+  p: 4,
+};
 
 function Timer() {
   const { isStart, userData } = useSelector((state) => state.registration);
@@ -45,39 +57,42 @@ function Timer() {
     }
     return () => clearInterval(intervalId);
   }, [isStart]);
-
+  const isStopReset = (isStart && !!timer) || (!!timer && !isStart);
   const time = timeToString(timer);
-
   return (
-    <Box>
-      <Typography variant="h5">Participant</Typography>
-      <Typography variant="body2">
-        ID: {userData.id}
-        <br />
-        Participant: {`${userData.firstName} ${userData.lastName}`}
-      </Typography>
+    <Modal open={true}>
+      <Box sx={{ ...style, ...stylesContainer }}>
+        <Typography variant="h5">Participant</Typography>
+        <Typography variant="body2">
+          ID: {userData.id}
+          <br />
+          Participant: {`${userData.firstName} ${userData.lastName}`}
+        </Typography>
 
-      <Typography variant="h4">{time}</Typography>
+        <Typography variant="h4" align="center" sx={{ py: "20px" }}>
+          {time}
+        </Typography>
 
-      <Stack
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        spacing={2}
-      >
-        {isStart && timer ? (
-          <>
-            <CustomButton onClick={resetTheTimer}>Reset</CustomButton>
-            <CustomButton onClick={handleSave}>Save</CustomButton>
-          </>
-        ) : (
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}
+        >
           <CustomButton onClick={starttheTimer}>
             {isStart ? "Stop" : "Start"}
           </CustomButton>
-        )}
-        <CustomButton onClick={handleCancel}>Cancel</CustomButton>
-      </Stack>
-    </Box>
+          {isStopReset && (
+            <>
+              <CustomButton onClick={resetTheTimer}>Reset</CustomButton>
+              <CustomButton onClick={handleSave}>Save</CustomButton>
+            </>
+          )}
+
+          <CustomButton onClick={handleCancel}>Cancel</CustomButton>
+        </Stack>
+      </Box>
+    </Modal>
   );
 }
 
