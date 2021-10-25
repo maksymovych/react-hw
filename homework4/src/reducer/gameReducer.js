@@ -33,7 +33,7 @@ export const gameReducer = (state = initialState, action) => {
     case MOVE_TO:
       return {
         ...state,
-        history: [...state.history.slice(0, action.payload + 1)],
+        history: [...state.history.slice(0, action.payload.step + 1)],
         stepNumber: action.payload.step,
         isXTurn: action.payload.isX,
       };
