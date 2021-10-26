@@ -22,24 +22,3 @@ export const fetchCards = () => {
   };
 };
 
-export const fetchRegistrationForm = () => {
-  return async (dispatch) => {
-    try {
-      const fieldsData = await fetchRegistration();
-      dispatch(fetchRegistrFormSuccess(fieldsData));
-    } catch (e) {
-      console.error(e);
-    }
-  };
-};
-
-export const fetchWinnerInfo = () => {
-  return async (dispatch) => {
-    try {
-      const winnerInfo = await fetchWinnerInfoApi();
-      console.log(winnerInfo);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-};
