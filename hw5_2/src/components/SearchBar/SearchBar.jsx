@@ -49,7 +49,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar({ ...props }) {
+export default function SearchAppBar({ children, ...props }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -67,6 +67,7 @@ export default function SearchAppBar({ ...props }) {
           >
             Competitions HW 5 with router
           </Typography>
+          {children}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

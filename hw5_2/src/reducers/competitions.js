@@ -1,5 +1,6 @@
 import {
   COMPETITION_FINISHED,
+  CREATE_CONTEST,
   FETCHING_FINISHED,
   FETCHING_START,
   FETCH_COMPETITIONS_ERROR,
@@ -70,6 +71,13 @@ export function competitionReducer(state = initialState, action) {
         competitions: [...result],
       };
 
+    case CREATE_CONTEST:
+      const pushedarray = [...state._competitions, { ...action.payload }];
+      return {
+        ...state,
+        competitions: [...pushedarray],
+        _competitions: [...pushedarray],
+      };
     default:
       return state;
   }

@@ -1,13 +1,23 @@
 import { Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { changeCrrentSatus, changeNameCompetition } from "../../actions";
+import {
+  changeCrrentSatus,
+  changeNameCompetition,
+  getWinner,
+} from "../../actions";
 import { stylesContainer } from "../../assets/index";
 import CustomButton from "../ui/CustomButton/CustomButton";
 
 function CardCompetition({ competitionId, name, status }) {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === "finished") {
+      dispatch(getWinner());
+    }
+  }, [dispatch, status]);
 
   const { theWinner } = useSelector((state) => state.cards);
   const { lastName } = theWinner;
@@ -28,7 +38,7 @@ function CardCompetition({ competitionId, name, status }) {
       <Container sx={{ ...stylesContainer }}>
         <Typography sx={{ ...styles }}>Id: {competitionId}</Typography>
         <Typography sx={{ ...styles }}>Name: {name}</Typography>
-        <Typography sx={{ ...styles }}>Status: {status}</Typography>
+        {status && <Typography sx={{ ...styles }}>Status: {status}</Typography>}
         {winner && <Typography sx={{ ...styles }}>Winner: {winner}</Typography>}
 
         <CustomButton fullWidth onClick={handleShow}>

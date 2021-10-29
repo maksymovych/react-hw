@@ -5,11 +5,12 @@ import CardCompetition from "./CardCompetition";
 import SearchBar from "../SearchBar/SearchBar";
 import { searchCompetition } from "../../actions";
 import Loader from "../Loader/Loader";
+import Create from "../Create/Create";
 
 function Competitions() {
   const dispatch = useDispatch();
   const { isFetching } = useSelector((state) => state.competitions);
-  console.log(isFetching, "hhhhhhhhh");
+
   function handleSearchCompetition(e) {
     dispatch(searchCompetition(e.target.value));
   }
@@ -29,7 +30,10 @@ function Competitions() {
   );
   return (
     <>
-      <SearchBar onChange={handleSearchCompetition} />
+      <SearchBar onChange={handleSearchCompetition}>
+        <Create />
+      </SearchBar>
+
       <Grid
         sx={{ p: "25px" }}
         container

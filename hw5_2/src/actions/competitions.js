@@ -6,6 +6,7 @@ export const FETCHING_FINISHED = "[fetching] finished fetching";
 export const FETCHING_START = "[fetching] start fetching";
 export const SEARCH_COMPETITION = "[search] finde matches";
 export const COMPETITION_FINISHED = "[competition] finished";
+export const CREATE_CONTEST = "[competition] create contest";
 
 export const fetchCompetitionsSuccess = (data) => ({
   type: FETCH_COMPETITIONS_SUCCESS,
@@ -32,4 +33,9 @@ export const searchCompetition = (data) => ({
 export const competitionFinished = (id) => ({
   type: COMPETITION_FINISHED,
   payload: id,
+});
+
+export const createContest = (data) => ({
+  type: CREATE_CONTEST,
+  payload: { ...data },
 });
